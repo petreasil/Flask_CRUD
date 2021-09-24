@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block head %}
+<title>Tasks</title>
+{% endblock %}
+{%block body %}
+<h3 class="text-center">Your Tasks</h3>
+<div class="container">
+  <div class="row justify-content-center mt-1">
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">task</th>
+            <th scope="col" class="text-center">added</th>
+            <th scope="col" class="text-center">actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+          <tr>
+            <td>{{task.content}}</td>
+            <td>{{task.date_created.date()}}</td>
+            <td>
+              <div class="d-flex justify-content-evenly">
+                <a href="/delete/{{task.id}}" class="btn btn-primary btn-sm">delete</a
+                ><a href="/update/{{task.id}}" class="btn btn-secondary btn-sm">update</a>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <form action="/" method="POST">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Enter Task</label>
+        <input
+          name="content"
+          type="text"
+          class="form-control"
+          id="content"
+          aria-describedby="emailHelp"
+        />
+      </div>
+
+      <button type="submit" value="add task" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
